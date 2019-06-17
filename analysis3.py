@@ -16,21 +16,25 @@ K = int(input())
 for i in range(K):
     a,b = map(int,input().strip().split(" "))
     D[a][b] = 1
-for k in range(N):
+
+#ここまでデータの読み込み
+#以下でデータの解析
+for k in range(N):#Floyd-Warshall法
     for i in range(N):
         for j in range(N):
             if D[i][k] > 0 and D[k][j] > 0:
                 if D[i][j] == 0 or D[i][j] > D[i][k]+D[k][j]:
                     D[i][j] = D[i][k]+D[k][j]
-ave = 0
-countz = 0
-M = 0
+
+countz = 0#距離不定な組合せの個数(CountZero
+ave = 0#平均距離
+M = 0#最大距離
 for i in range(N):
     for j in range(N):
         a = D[i][j]
-        if a == 0:
+        if a == 0:#距離不定な組の数
             countz += 1
-        else:
+        else:#距離が定まる場合
             ave += a
             if M < a:
                 M = a
